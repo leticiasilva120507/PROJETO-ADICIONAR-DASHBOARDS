@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIT - SECRETARIA DE INOVAÇÃO E TECNOLOGIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <%
+    let erroValidacao = {"email":"", "senha":""};
+    let msgErro =  {"email": "", "senha":""};
+    if(erros){
+        erros.errors.forEach(function(erro){
+            if(erro.path == "email"){
+                erroValidacao.email = "erro",
+                msgErro.email = erro.msg
+            }
+
+            if(erro.path == "senha"){
+                erroValidacao.senha = "erro",
+                msgErro.senha = erro.msg
+            }
+        })
+    };%>
+
+    <section id="container">
+    <header>
+        <section id="cabecalho">
+        <p id="titulo_1">Central de <br> Relatórios</p>
+        <img id="logo-sit" src="img/logo-sit.png" alt="logo de Barueri">
+    </section>
+   
+    </header>
+
+    <main>
+        <form action="/index" method="post">
+            <h1>Entrar</h1>
+            <label for="email">Email</label><br>
+            <input type="email" name="email" id="email" placeholder="aline@rocha.com" required value="<%= valores.email %>" class="<%= erroValidacao.email %>"><br>
+            <p class="erro_mensagem"><%= msgErro.email %></p>
+
+            <label for="senha">Senha</label><br>
+            <input type="password" name="senha" id="senha" required value="<%= valores.senha %>" class="<%= erroValidacao.senha %>"><br>
+            <p class="erro_mensagem"><%= msgErro.senha %></p>
+
+           <button type="submit"><a href="/relatorios">Entrar</a></button>
+        </form>
+    </main>
+</section>
+
+
+    
+</body>
+</html>

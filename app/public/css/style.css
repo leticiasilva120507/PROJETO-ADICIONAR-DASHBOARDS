@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:'montserrat';
+}
+
+
+
+
+#container{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../img/fundo-barueri.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+header #titulo_1{
+    margin: 30px;
+    border-left: solid 2px black;
+    font-size: 22px;
+    padding-left: 10px;
+    font-weight: 400;
+}
+
+#cabecalho{
+    display: flex;
+}
+
+#logo-sit{
+    width: 300px;
+    margin-left: 60%;
+    margin-top: 20px;
+}
+
+main{
+    background-color: white;
+    width: 240px;
+    height: 340px;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: 15%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+form h1{
+    text-align: center;
+    color: black;
+    padding: 30px 0px 30px 0px;
+}
+
+form label{
+   margin-left: 30px; 
+    
+}
+
+form input{
+    padding: 10px;
+    margin-left: 30px;
+    width: 150px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    outline: none;
+    
+}
+
+button{
+    margin-left: 30%;
+    margin-top: 15px;
+    width: 90px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #e14c68;
+}
+
+button a{
+    color: white;
+    text-decoration: none;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #f8859a;
+}
+
+.erro{
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: lightpink;
+    padding-left: 5px;
+}
+
+.erro_mensagem{
+    color: red;
+    text-align: center;
+    font-size: 9.6px;
+    padding-bottom: 10px;
+}
