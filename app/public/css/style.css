@@ -30,13 +30,13 @@ header #titulo_1{
 
 #logo-sit{
     width: 300px;
-    margin-left: 60%;
+    margin-left: 70%;
     margin-top: 20px;
 }
 
 main{
     background-color: white;
-    width: 240px;
+    width: 300px;
     height: 340px;
     margin: auto;
     border-radius: 10px;
@@ -58,7 +58,7 @@ form label{
 form input{
     padding: 10px;
     margin-left: 30px;
-    width: 150px;
+    width: 200px;
     margin-top: 5px;
     margin-bottom: 10px;
     border: none;
@@ -69,7 +69,7 @@ form input{
 }
 
 button{
-    margin-left: 30%;
+    margin-left: 35%;
     margin-top: 15px;
     width: 90px;
     padding: 10px;
