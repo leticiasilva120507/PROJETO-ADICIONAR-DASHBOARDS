@@ -1,4 +1,6 @@
 const loginModel = require('../models/login_model');
+const bcrypt = require("bcryptjs");
+var salt = bcrypt.genSaltSync(12);
 const {body, validationResult} = require("express-validator");
 
 const usuarioController = {
@@ -11,37 +13,21 @@ const usuarioController = {
 
 //métodos
 
-login: async (req, res)=>{
-    try{
-        let errors = validationResult(req);
-        if(errors.isEmpty()){
-            //não tem erro no formulário
-            const dadosFormulario = {
-                "email":req.body.email,
-                "senha":req.body.senha
-            };
-            let resultado = await loginModel.create (dadosFormulario);
-
-            if(resultado){
-                return res.render("pages/index");
-            }else{
-                return res.render("pages/relatorios",
-                {"errors":null, "valores":req.body}
-                )
-            }
-
-        }else{
-            //erro no formulário
-            res.render("pages/relatorios",
-                {"erro":errors, "valores":req.body});
+login: (req, res)=>{
+        const erros = validationResult(req);
+        if(erros.isEmpty()){
+            return res.render("pages/index", {erro:erros})
         }
-    }catch(error){
-        console.log(error);
-        return false;
-    }
+
+        if(req.session.autenticado != null){
+            res.redirect('/');
+        }else{
+            res.render('pages/index', {erro:erros})
+        }
+   
 
 
 }
-}
+};
 
 module.exports = usuarioController;
