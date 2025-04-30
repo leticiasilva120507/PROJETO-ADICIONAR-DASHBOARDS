@@ -1,12 +1,8 @@
 const pool = require("../../config/pool_conexoes");
-
 const login_model ={
-    //metodo para retornar todo o registro da entidade usuario
-    findAll: async()=>{
-
+    create: async (dadosForm) =>{
         try{
-            const [resultados, estrutura] = await
-            pool.query("")
+            const[linhas, campos] = await pool.query('INSERT INTO')
         }
     }
-}
+};
