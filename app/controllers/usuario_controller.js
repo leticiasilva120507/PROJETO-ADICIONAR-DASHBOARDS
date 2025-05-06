@@ -1,5 +1,9 @@
-const loginModel = require('../models/login_model');
-const bcrypt = require("bcryptjs");
+/* aqui é validado o formulário.
+é através do controller que é conectado a validação ao banco de dados
+ */
+
+const loginModel = require('../models/login_model'); // me faz conectar a validação ao banco de dados
+const bcrypt = require("bcryptjs"); //é uma biblioteca que me faz utilizar funções para criar e comparar senhas criptografadas
 var salt = bcrypt.genSaltSync(12);
 const {body, validationResult} = require("express-validator");
 
@@ -15,12 +19,12 @@ const usuarioController = {
 
 login: (req, res)=>{
         const erros = validationResult(req);
-        if(erros.isEmpty()){
+        if(!erros.isEmpty()){
             return res.render("pages/index", {erro:erros})
         }
 
         if(req.session.autenticado != null){
-            res.redirect('/');
+            res.redirect('/relatorios');
         }else{
             res.render('pages/index', {erro:erros})
         }

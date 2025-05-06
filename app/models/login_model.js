@@ -1,3 +1,6 @@
+/* O pool me dá acesso ao banco de dados e é através do model que 
+modifico o banco de dados sem ter que modificar manualmente no mysql workbench, ou seja, modifico aqui mesmo.*/
+
 const pool = require("../../config/pool_conexoes");
 const login_model ={
     findAll: async() =>{
