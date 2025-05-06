@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/autenticador_middleware");
+const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/login_model");
 const usuario_Controller = require("../controllers/usuario_controller");
 
 const {body, validationResult} = require("express-validator");
