@@ -19,10 +19,6 @@ const usuarioController = {
 
 login: (req, res)=>{
         const erros = validationResult(req);
-        var dadosForm = {
-            email: req.body.email,
-            senha:bcrypt.hashSync(req.body.senha, salt)
-        }
         if(!erros.isEmpty()){
             return res.render("pages/index", {erro:erros})
         }
