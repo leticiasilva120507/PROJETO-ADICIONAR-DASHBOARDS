@@ -1,26 +1,30 @@
-var express = require('express');
-var router = express.Router();
-const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/login_model");
-const usuario_Controller = require("../controllers/usuario_controller");
 
-const {body, validationResult} = require("express-validator");
+const express = require("express");
+const router = express.Router();
 
+const {
+  gravarUsuAutenticado,
+  limparSessao
+} = require("../models/autenticador_middleware");
 
+const usuarioController = require("../controllers/usuarioController");
 
-router.get('/', function(req, res){
-    res.render('pages/index', {"erros": null, "valores":{"email":"", "senha":""}});
+// Tela de login
+router.get("/login", (req, res) => {
+  res.render("pages/login", { listaErros: null });
 });
 
-router.get('/relatorios', function(req, res){
-    res.render('pages/relatorios');
+// Processar login
+router.post(
+  "/login",
+  usuarioController.regrasValidacaoFormLogin,
+  usuarioController.logar,           // Valida e autentica
+  gravarUsuAutenticado               // Grava sessão se login for válido
+);
+
+// Logout
+router.get("/sair", limparSessao, (req, res) => {
+  res.redirect("/login");
 });
-
-router.post("/", usuario_Controller.regrasValidacao, function(req,res){
-    usuario_Controller.login(req, res);
-});
-
-
-
-
 
 module.exports = router;
