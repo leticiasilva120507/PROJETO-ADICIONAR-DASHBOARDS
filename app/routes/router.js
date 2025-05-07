@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado,} = require("../models/login_model");
+const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado,} = require("../models/autenticador_middleware");
 const usuario_Controller = require("../controllers/usuario_controller");
 
 
