@@ -13,7 +13,7 @@ router.get('/relatorios', function(req, res){
     res.render('pages/relatorios');
 });
 
-router.post("/", usuario_Controller.regrasValidacao,
+router.post("/", usuario_Controller.validacaoFormLog,
     gravarUsuAutenticado,
      function(req,res){
     usuario_Controller.login(req, res);
