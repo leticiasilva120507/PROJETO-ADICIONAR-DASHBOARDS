@@ -40,20 +40,10 @@ gravarUsuAutenticado = async (req, res, next) => {
     next();
 }
 
-verificarUsuAutorizado = (tipoPermitido, destinoFalha) => {
-    return (req, res, next) => {
-        if (req.session.autenticado.autenticado != null &&
-            tipoPermitido.find(function (element) { return element == req.session.autenticado }) != undefined) {
-            next();
-        } else {
-            res.render(destinoFalha, req.session.autenticado);
-        }
-    };
-}
+
 
 module.exports = {
     verificarUsuAutenticado,
     limparSessao,
     gravarUsuAutenticado,
-    verificarUsuAutorizado
-}
+};
