@@ -6,6 +6,9 @@ const login_model ={
     findAll: async() =>{
         try{
             const [resultados] = await pool.query(
+                u.id,
+                u.email,
+                u.senha
 
             )
             return resultados;
@@ -14,11 +17,11 @@ const login_model ={
             return error;
         }
     },
-
+//buscando um usuário pelo e-mail
     findEmail: async (camposForm) =>{
         try{
             const [resultados] = await pool.query("SELECT * FROM usuario WHERE email =? ",
-                [camposForm.email, camposForm.email]
+                [camposForm.email]
             )
             return resultados;
         }catch(error){
@@ -29,7 +32,8 @@ const login_model ={
 
     findId: async(id) =>{
         try{
-            const[resultados] = await pool.query("")
+            const[resultados] = await pool.query("SELECT * FROM usuario WHERE id_usuario = ?",
+    [id]);
             return resultados;
         }catch(error){
             console.log(error);
