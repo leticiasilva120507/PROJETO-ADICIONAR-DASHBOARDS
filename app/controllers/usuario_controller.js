@@ -4,7 +4,7 @@
 
 const loginModel = require('../models/login_model'); // me faz conectar a validação ao banco de dados
 const bcrypt = require("bcryptjs"); //é uma biblioteca que me faz utilizar funções para criar e comparar senhas criptografadas
-var salt = bcrypt.genSaltSync(12);
+var salt = bcrypt.genSaltSync(10);
 const {body, validationResult} = require("express-validator");
 
 const usuarioController = {

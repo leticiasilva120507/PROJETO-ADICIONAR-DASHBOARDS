@@ -1,30 +1,28 @@
+var express = require('express');
+var router = express.Router();
+const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado,} = require("../models/login_model");
+const usuario_Controller = require("../controllers/usuario_controller");
 
-const express = require("express");
-const router = express.Router();
 
-const {
-  gravarUsuAutenticado,
-  limparSessao
-} = require("../models/autenticador_middleware");
 
-const usuarioController = require("../controllers/usuarioController");
-
-// Tela de login
-router.get("/login", (req, res) => {
-  res.render("pages/login", { listaErros: null });
+router.get('/', verificarUsuAutenticado, function(req, res){
+    res.render('pages/index', {"erros": null, "valores":{"email":"", "senha":""}});
 });
 
-// Processar login
-router.post(
-  "/login",
-  usuarioController.regrasValidacaoFormLogin,
-  usuarioController.logar,           // Valida e autentica
-  gravarUsuAutenticado               // Grava sessão se login for válido
-);
-
-// Logout
-router.get("/sair", limparSessao, (req, res) => {
-  res.redirect("/login");
+router.get('/relatorios', function(req, res){
+    res.render('pages/relatorios');
 });
+
+router.post("/", usuario_Controller.regrasValidacao,
+    gravarUsuAutenticado,
+     function(req,res){
+    usuario_Controller.login(req, res);
+});
+
+    
+
+
+
+
 
 module.exports = router;
