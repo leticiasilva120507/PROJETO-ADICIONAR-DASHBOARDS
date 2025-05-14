@@ -76,11 +76,7 @@ button{
     border-radius: 10px;
     border: none;
     background-color: #e14c68;
-}
-
-button a{
-    color: white;
-    text-decoration: none;
+     color: white;
 }
 
 button:hover{

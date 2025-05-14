@@ -42,4 +42,8 @@ button{
     color: white;
 }
 
+button a{
+    color: white;
+    text-decoration: none;
+}
 
