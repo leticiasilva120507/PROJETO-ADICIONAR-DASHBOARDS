@@ -2,13 +2,12 @@
 modifico o banco de dados sem ter que modificar manualmente no mysql workbench, ou seja, modifico aqui mesmo.*/
 
 const pool = require("../../config/pool_conexoes");
+
 const login_model ={
     findAll: async() =>{
         try{
             const [resultados] = await pool.query(
-                u.id,
-                u.email,
-                u.senha
+                "SELECT id, email, senha"
 
             )
             return resultados;
@@ -18,9 +17,9 @@ const login_model ={
         }
     },
 //buscando um usuário pelo e-mail
-    findEmail: async (camposForm) =>{
+    findUserEmail: async (camposForm) =>{
         try{
-            const [resultados] = await pool.query("SELECT * FROM usuario WHERE email =? ",
+            const [resultados] = await pool.query("SELECT * FROM usuarios WHERE email =? ",
                 [camposForm.email]
             )
             return resultados;
@@ -32,7 +31,7 @@ const login_model ={
 
     findId: async(id) =>{
         try{
-            const[resultados] = await pool.query("SELECT * FROM usuario WHERE id_usuario = ?",
+            const[resultados] = await pool.query("SELECT * FROM usuarios WHERE id = ?",
     [id]);
             return resultados;
         }catch(error){
@@ -45,7 +44,7 @@ const login_model ={
     create:async(camposForm) =>{
         try{
             const[resultados] = await pool.query(
-                "insert into usuario set?", [camposForm]
+                "insert into usuarios set?", [camposForm]
             )
             return resultados;
         }catch(error){
@@ -56,9 +55,9 @@ const login_model ={
 
     update: async (camposForm) =>{
         try{
-            const[resultados] = await pool.query("UPDATE usuario SET email =?, senha =?"+
+            const[resultados] = await pool.query("UPDATE usuarios SET email =?, senha =?"+
                 "WHERE id =?",
-                [camposForm.email, camposForm.camposForm.senha]
+                [camposForm.email, camposForm.senha, CamposForm.id]
             )
             return resultados;
         } catch(error){

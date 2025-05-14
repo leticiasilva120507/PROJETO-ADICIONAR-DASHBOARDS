@@ -40,11 +40,11 @@
         <form action="/index" method="post">
             <h1>Entrar</h1>
             <label for="email">Email</label><br>
-            <input type="email" name="email" id="email" placeholder="aline@rocha.com" required value="<%= valores.email %>" class="<%= erroValidacao.email %>"><br>
+            <input type="email" name="email" id="email" placeholder="aline@rocha.com" required  class="<%= erroValidacao.email %>"><br>
             <p class="erro_mensagem"><%= msgErro.email %></p>
 
             <label for="senha">Senha</label><br>
-            <input type="password" name="senha" id="senha" required value="<%= valores.senha %>" class="<%= erroValidacao.senha %>"><br>
+            <input type="password" name="senha" id="senha" required class="<%= erroValidacao.senha %>"><br>
             <p class="erro_mensagem"><%= msgErro.senha %></p>
 
            <button type="submit"><a href="/relatorios">Entrar</a></button>

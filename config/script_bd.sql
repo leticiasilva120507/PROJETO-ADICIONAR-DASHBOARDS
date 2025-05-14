@@ -20,4 +20,6 @@ SET SENHA = '$2b$10$ZkEUOLzVwdG9A6lOhqquG.ARiHPoPrwc2.DLA7/.XpbOITYmRve9e'
 WHERE EMAIL = 'sit.leticia@barueri.sp.gov.br';
 
 DELETE FROM USUARIOS
-WHERE EMAIL = 'rm90116@estudante.fieb.edu.br' AND SENHA = '$2b$10$WQPOyDc0gkn/VGEEYLLVAesz73akEO2LBbeaqvLipUsjWFRYr0bL2'
+WHERE EMAIL = 'rm90116@estudante.fieb.edu.br' AND SENHA = '$2b$10$WQPOyDc0gkn/VGEEYLLVAesz73akEO2LBbeaqvLipUsjWFRYr0bL2';
+
+SHOW TABLES;
