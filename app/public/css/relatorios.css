@@ -39,10 +39,7 @@ button{
     background-color: #47a4c1;
     border-radius: 10px;
     cursor: pointer;
+    color: white;
 }
 
-button a{
-    color: white;
-    text-decoration: none;
-}
 
