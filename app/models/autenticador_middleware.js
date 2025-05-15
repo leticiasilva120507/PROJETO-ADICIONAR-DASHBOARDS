@@ -18,7 +18,7 @@ limparSessao = (req, res, next) => {
 }
 
 gravarUsuAutenticado = async (req, res, next) => {
-    var autenticado =  { autenticado: null, id: null, tipo: null };
+    var autenticado =  { autenticado: null, id: null };
     erros = validationResult(req)
     if (erros.isEmpty()) {
         var dadosForm = {

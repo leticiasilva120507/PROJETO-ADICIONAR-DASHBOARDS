@@ -57,7 +57,7 @@ const login_model ={
         try{
             const[resultados] = await pool.query("UPDATE usuarios SET email =?, senha =?"+
                 "WHERE id =?",
-                [camposForm.email, camposForm.senha, CamposForm.id]
+                [camposForm.email, camposForm.senha, camposForm.id]
             )
             return resultados;
         } catch(error){
