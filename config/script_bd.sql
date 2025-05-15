@@ -23,3 +23,11 @@ DELETE FROM USUARIOS
 WHERE EMAIL = 'rm90116@estudante.fieb.edu.br' AND SENHA = '$2b$10$WQPOyDc0gkn/VGEEYLLVAesz73akEO2LBbeaqvLipUsjWFRYr0bL2';
 
 SHOW TABLES;
+
+UPDATE USUARIOS
+SET SENHA = '$2b$10$vyks2ubjGhCjdTUhQnp8QOUulhxjYordra/ij8OGvvquKgeY4obBK'
+WHERE EMAIL = 'sit.leticia@barueri.sp.gov.br';
+
+UPDATE USUARIOS
+SET SENHA = '$2b$10$omMQvSjXp.Jk4suo.KwcruHBwVkDDqdqW89U7wNwUdJoNlpb.GpVy'
+WHERE EMAIL = 'sit.claudia@barueri.sp.gov.br';
