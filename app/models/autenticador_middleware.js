@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const usuario = require("./login_model");
 const bcrypt = require("bcryptjs");
+const { emit } = require("../../config/pool_conexoes");
 
 verificarUsuAutenticado = (req, res, next) => {
     if (req.session.autenticado) {
@@ -28,7 +29,7 @@ gravarUsuAutenticado = async (req, res, next) => {
         var results = await usuario.findUserEmail(dadosForm);
         var total = Object.keys(results).length;
         if (total == 1) {
-            if (bcrypt.compareSync(dadosForm.senha, results[0].senha)) {
+            if (bcrypt.compareSync(dadosForm.senha, results[0].senha) && dadosForm.email == results.email) {
                 var autenticado = {
                     autenticado: results[0].email,
                     id: results[0].id
