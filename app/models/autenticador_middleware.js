@@ -7,7 +7,7 @@ verificarUsuAutenticado = (req, res, next) => {
     if (req.session.autenticado) {
         var autenticado = req.session.autenticado;
     } else {
-        var autenticado = { autenticado: null, id: null, tipo: null };
+        var autenticado = { autenticado: null, id: null };
     }
     req.session.autenticado = autenticado;
     next();
@@ -29,7 +29,7 @@ gravarUsuAutenticado = async (req, res, next) => {
         var results = await usuario.findUserEmail(dadosForm);
         var total = Object.keys(results).length;
         if (total == 1) {
-            if (bcrypt.compareSync(dadosForm.senha, results[0].senha) && dadosForm.email == results.email) {
+            if (bcrypt.compareSync(dadosForm.senha, results[0].senha)) {
                 var autenticado = {
                     autenticado: results[0].email,
                     id: results[0].id
