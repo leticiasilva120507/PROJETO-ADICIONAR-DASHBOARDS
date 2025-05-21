@@ -6,10 +6,10 @@ const usuario_Controller = require("../controllers/usuario_controller");
 
 
 router.get('/', verificarUsuAutenticado, function(req, res){
-    res.render('pages/index', {"erros": null, "valores":{"email":"", "senha":""}});
+    res.render('pages/index', {"erros": null});
 });
 
-router.get('/relatorios', function(req, res){
+router.get('/relatorios', verificarUsuAutenticado, function(req, res){
     res.render('pages/relatorios');
 });
 

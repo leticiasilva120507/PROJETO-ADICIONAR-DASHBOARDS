@@ -16,12 +16,12 @@
     if(erros){
         erros.errors.forEach(function(erro){
             if(erro.path == "email"){
-                erroValidacao.email = "erro",
+                erroValidacao.email = "erro";
                 msgErro.email = erro.msg
             }
 
             if(erro.path == "senha"){
-                erroValidacao.senha = "erro",
+                erroValidacao.senha = "erro";
                 msgErro.senha = erro.msg
             }
         })

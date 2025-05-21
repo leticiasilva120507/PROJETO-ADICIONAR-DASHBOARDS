@@ -4,10 +4,10 @@ const bcrypt = require("bcryptjs");
 
 verificarUsuAutenticado = (req, res, next) => {
     if (req.session.autenticado) {
-        let autenticado = req.session.autenticado;
+        var autenticado = req.session.autenticado;
     } else {
 
-        autenticado = { autenticado: null, id: null,};
+        var autenticado = { autenticado: null, id: null,};
     }
     req.session.autenticado = autenticado;
     next();
@@ -19,7 +19,7 @@ limparSessao = (req, res, next) => {
 }
 
 gravarUsuAutenticado = async (req, res, next) => {
-    let autenticado =  { autenticado: null, id: null };
+    var autenticado =  { autenticado: null, id: null };
     erros = validationResult(req)
     if (erros.isEmpty()) {
         var dadosForm = {
@@ -30,7 +30,7 @@ gravarUsuAutenticado = async (req, res, next) => {
         var total = Object.keys(results).length;
         if (total == 1) {
             if (bcrypt.compareSync(dadosForm.senha, results[0].senha)) {
-                let autenticado = {
+                var autenticado = {
                     autenticado: results[0].email,
                     id: results[0].id
                 };
