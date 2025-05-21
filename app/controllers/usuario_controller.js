@@ -23,7 +23,7 @@ login: (req, res)=>{
             return res.render("pages/index", {erro:erros})
         }
 
-        if(req.session.autenticado != null){
+        if(req.session.autenticado.autenticado.id != null){
             res.redirect('/relatorios');
         }else{
             res.render('pages/index', {erro:erros})

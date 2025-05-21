@@ -30,7 +30,7 @@ main{
     margin: 5% 5% 5% 20%;
 }
 
-button{
+.botao-dash{
     margin-top: 30px;
     margin-left: 10px;
     width: 200px;
@@ -42,8 +42,38 @@ button{
     color: white;
 }
 
-button a{
+.botao-dash a{
     color: white;
     text-decoration: none;
+}
+
+.botao-dash:hover{
+    transition: 0.5s;
+    background-color:  #07c4fd;
+    font-size: 12px;
+}
+
+#botao-add{
+    width: 50px;
+    height: 30px;
+    border: none;
+    background-color: #47a4c1;
+    border-radius: 10px;
+    position: relative;
+    bottom: 280px;
+    margin-left: 50px;
+
+}
+
+#botao-add a{
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+#botao-add:hover{
+    cursor: pointer;
+    background-color: #07c4fd;
+    transition: 0.5s;
 }
 
