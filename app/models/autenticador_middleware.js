@@ -3,19 +3,19 @@ const usuario = require("./login_model");
 const bcrypt = require("bcryptjs");
 
 verificarUsuAutenticado = (req, res, next) => {
-    if (req.session.autenticado) {
+     if (req.session.autenticado) {
         var autenticado = req.session.autenticado;
     } else {
-
-        var autenticado = { autenticado: null, id: null,};
+        var autenticado = { autenticado: null, id: null };
     }
     req.session.autenticado = autenticado;
     next();
 }
 
+
 limparSessao = (req, res, next) => {
     req.session.destroy();
-    next()
+    next();
 }
 
 gravarUsuAutenticado = async (req, res, next) => {
@@ -27,24 +27,36 @@ gravarUsuAutenticado = async (req, res, next) => {
             senha: req.body.senha,
         };
         var results = await usuario.findUserEmail(dadosForm);
+         console.log('Resultados da consulta:', results);
         var total = Object.keys(results).length;
         if (total == 1) {
-            if (bcrypt.compareSync(dadosForm.senha, results[0].senha)) {
-                var autenticado = {
-                    autenticado: results[0].email,
-                    id: results[0].id
-                };
-            }
-        } 
-    } 
+            //verifica se o email existe
+            //se existir, verifica se a senha está correta
+            //se a senha estiver correta, grava o usuário na sessão
+            //se não estiver correta, retorna erro
+        if (bcrypt.compareSync(dadosForm.senha, results[0].SENHA)) {
+        var autenticado = {
+        autenticado: results[0].EMAIL,
+        id: results[0].ID
+    };
+
+    
+}
+
+
+}
+
+}
+
+
+
     req.session.autenticado = autenticado;
     next();
 }
 
 
-
 module.exports = {
     verificarUsuAutenticado,
     limparSessao,
-    gravarUsuAutenticado,
+    gravarUsuAutenticado
 };

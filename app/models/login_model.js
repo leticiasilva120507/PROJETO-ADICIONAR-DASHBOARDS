@@ -19,7 +19,7 @@ const login_model ={
 //buscando um usuário pelo e-mail
     findUserEmail: async (camposForm) =>{
         try{
-            const [resultados] = await pool.query("SELECT * FROM USUARIOS WHERE EMAIL =? ",
+            const [resultados] = await pool.query("SELECT * FROM USUARIOS WHERE EMAIL = ? ",
                 [camposForm.email]
             )
             return resultados;
@@ -44,7 +44,7 @@ const login_model ={
     create:async(camposForm) =>{
         try{
             const[resultados] = await pool.query(
-                "INSERT INTO USUARIOS SET?", [camposForm]
+                "INSERT INTO USUARIOS SET ?", [camposForm]
             )
             return resultados;
         }catch(error){
@@ -55,8 +55,8 @@ const login_model ={
 
     update: async (camposForm) =>{
         try{
-            const[resultados] = await pool.query("UPDATE USUARIOS SET EMAIL =?, SENHA =?"+
-                "WHERE ID =?",
+            const[resultados] = await pool.query("UPDATE USUARIOS SET EMAIL = ?, SENHA = ?" +
+                "WHERE ID = ?",
                 [camposForm.email, camposForm.senha, camposForm.id]
             )
             return resultados;

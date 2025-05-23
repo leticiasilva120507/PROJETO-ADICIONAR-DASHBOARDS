@@ -31,3 +31,7 @@ WHERE EMAIL = 'sit.leticia@barueri.sp.gov.br';
 UPDATE USUARIOS
 SET SENHA = '$2b$10$omMQvSjXp.Jk4suo.KwcruHBwVkDDqdqW89U7wNwUdJoNlpb.GpVy'
 WHERE EMAIL = 'sit.claudia@barueri.sp.gov.br';
+
+UPDATE USUARIOS
+SET ID = 2
+WHERE ID = 16;

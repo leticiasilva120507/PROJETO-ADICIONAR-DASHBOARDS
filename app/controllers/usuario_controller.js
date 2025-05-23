@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs"); //é uma biblioteca que me faz utilizar fun�
 var salt = bcrypt.genSaltSync(10);
 const {body, validationResult} = require("express-validator");
 
-const usuarioController = {
+const usuario_controller = {
     //validação
        validacaoFormLog: [
         body("email").isEmail().withMessage("Insira um email válido!"),
@@ -20,10 +20,11 @@ const usuarioController = {
 login: (req, res)=>{
         const erros = validationResult(req);
         if(!erros.isEmpty()){
+            console.log(erros);
             return res.render("pages/index", {erro:erros})
         }
 
-        if(req.session.autenticado.autenticado.id != null){
+        if(req.session.autenticado.id != null){
             res.redirect('/relatorios');
         }else{
             res.render('pages/index', {erro:erros})
@@ -34,4 +35,4 @@ login: (req, res)=>{
 }
 };
 
-module.exports = usuarioController;
+module.exports = usuario_controller;
