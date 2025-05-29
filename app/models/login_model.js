@@ -19,9 +19,12 @@ const login_model ={
 //buscando um usuário pelo e-mail
     findUserEmail: async (camposForm) =>{
         try{
-            const [resultados] = await pool.query("SELECT * FROM USUARIOS WHERE EMAIL = ? ",
-                [camposForm.email]
+            const email = camposForm.email.trim();
+            console.log("[login_model] E-mail recebido para busca:", email);
+            const [resultados] = await pool.query("SELECT * FROM USUARIOS WHERE LOWER(EMAIL) = LOWER(?) ",
+                [email]
             )
+            console.log("[login_model] Resultado da busca:", resultados);
             return resultados;
         }catch(error){
             console.log(error);

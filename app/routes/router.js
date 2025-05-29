@@ -6,7 +6,7 @@ const usuario_controller = require("../controllers/usuario_controller");
 
 
 router.get('/', function(req, res){
-    res.render('pages/index', {"erros": null});
+    res.render('pages/index', {erros: []});
 });
 
 router.get('/relatorios', verificarUsuAutenticado, function(req, res){

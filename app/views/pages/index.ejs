@@ -10,22 +10,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Início do bloco EJS para processar erros -->
     <%
+    // Inicializa objetos para controlar o estado visual e mensagens dos campos
     let erroValidacao = {"email":"", "senha":""};
     let msgErro =  {"email": "", "senha":""};
-    if(erros){
-        erros.errors.forEach(function(erro){
-            if(erro.path == "email"){
-                erroValidacao.email = "erro";
-                msgErro.email = erro.msg
-            }
-
-            if(erro.path == "senha"){
-                erroValidacao.senha = "erro";
-                msgErro.senha = erro.msg
-            }
-        })
-    };%>
+    let listaErros = [];
+    // Se existem erros recebidos do backend
+    if (erros) {
+        // Se for um array direto, usa como está
+        if (Array.isArray(erros)) {
+            listaErros = erros;
+        // Se vier como objeto com propriedade 'errors', usa essa propriedade
+        } else if (Array.isArray(erros.errors)) {
+            listaErros = erros.errors;
+        }
+    }
+    // Para cada erro, define a classe visual e a mensagem do campo correspondente
+    listaErros.forEach(function(erro){
+        if(erro.path == "email"){
+            erroValidacao.email = "erro"; // Adiciona classe de erro ao campo email
+            msgErro.email = erro.msg       // Define mensagem de erro do email
+        }
+        if(erro.path == "senha"){
+            erroValidacao.senha = "erro"; // Adiciona classe de erro ao campo senha
+            msgErro.senha = erro.msg      // Define mensagem de erro da senha
+        }
+    });
+    %>
 
     <section id="container">
     <header>
@@ -39,19 +51,24 @@
     <main>
         <form action="/index" method="post">
             <h1>Entrar</h1>
+            <!-- Campo de email -->
             <label for="email">Email</label><br>
+            <!-- Input de email, recebe classe de erro se houver -->
             <input type="email" name="email" id="email" placeholder="aline@rocha.com" required  class="<%= erroValidacao.email %>"><br>
+            <!-- Mensagem de erro do email -->
             <p class="erro_mensagem"><%= msgErro.email %></p>
 
+            <!-- Campo de senha -->
             <label for="senha">Senha</label><br>
-            <input type="password" name="senha" id="senha" required class="<%= erroValidacao.senha %>"><br>
+            <!-- Input de senha, recebe classe de erro se houver -->
+            <input type="password" name="senha" id="senha" required class="<%= erroValidacao.senha %>"/><br>
+            <!-- Mensagem de erro da senha -->
             <p class="erro_mensagem"><%= msgErro.senha %></p>
 
            <button type="submit">Entrar</button>
         </form>
     </main>
 </section>
-
 
     
 </body>

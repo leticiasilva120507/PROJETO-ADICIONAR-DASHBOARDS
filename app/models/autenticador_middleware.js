@@ -18,41 +18,44 @@ limparSessao = (req, res, next) => {
     next();
 }
 
-gravarUsuAutenticado = async (req, res, next) => {
-    var autenticado =  { autenticado: null, id: null };
-    erros = validationResult(req)
+const gravarUsuAutenticado = async (req, res, next) => {
+    console.log("Entrou no middleware gravarUsuAutenticado");
+    let autenticado = { autenticado: null, id: null };
+    const erros = validationResult(req);
     if (erros.isEmpty()) {
-        var dadosForm = {
+        const dadosForm = {
             email: req.body.email,
             senha: req.body.senha,
         };
-        var results = await usuario.findUserEmail(dadosForm);
-         console.log('Resultados da consulta:', results);
-        var total = Object.keys(results).length;
-        if (total == 1) {
-            //verifica se o email existe
-            //se existir, verifica se a senha está correta
-            //se a senha estiver correta, grava o usuário na sessão
-            //se não estiver correta, retorna erro
-        if (bcrypt.compareSync(dadosForm.senha, results[0].SENHA)) {
-        var autenticado = {
-        autenticado: results[0].EMAIL,
-        id: results[0].ID
-    };
-
-    
-}
-
-
-}
-
-}
-
-
-
+        console.log("E-mail recebido do formulário:", dadosForm.email);
+        const results = await usuario.findUserEmail(dadosForm);
+        console.log("Resultado da consulta:", results);
+        if (results && results.length === 1) {
+            console.log("Senha digitada:", dadosForm.senha);
+            console.log("Senha do banco:", results[0].SENHA);
+            // Verifica a senha
+            if (bcrypt.compareSync(dadosForm.senha, results[0].SENHA)) {
+                autenticado = {
+                    autenticado: results[0].EMAIL,
+                    id: results[0].ID
+                };
+                console.log("Autenticado no middleware:", autenticado);
+                req.session.autenticado = autenticado;
+                return next();
+            } else {
+                // Senha incorreta
+                req.erros = [{ path: "senha", msg: "Senha incorreta!" }];
+                return next();
+            }
+        } else {
+            // Usuário não encontrado
+            req.erros = [{ path: "email", msg: "Usuário não encontrado!" }];
+            return next();
+        }
+    }
     req.session.autenticado = autenticado;
     next();
-}
+};
 
 
 module.exports = {

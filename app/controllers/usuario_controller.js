@@ -11,28 +11,32 @@ const usuario_controller = {
     //validação
        validacaoFormLog: [
         body("email").isEmail().withMessage("Insira um email válido!"),
-        body("senha").isStrongPassword({minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1, returnScore: false, pointsPerUnique: 1, pointsPerRepeat: 0.5, pointsForContainingLower: 10, pointsForContainingUpper:10, pointsForContainingNumber:10, pointsForContainingSymbol: 10}).withMessage("A senha está incorreta!"),
+        body("senha").notEmpty().withMessage("Digite a senha!")
        ],
 
 
 //métodos
 
-login: (req, res)=>{
-        const erros = validationResult(req);
-        if(!erros.isEmpty()){
-            console.log(erros);
-            return res.render("pages/index", {erro:erros})
-        }
-
-        if(req.session.autenticado.id != null){
-            res.redirect('/relatorios');
-        }else{
-            res.render('pages/index', {erro:erros})
-        }
-   
-
-
+login: (req, res) => {
+     console.log("Sessão no controller:", req.session.autenticado);
+    const erros = validationResult(req);
+    // Se houver erros de validação do express-validator
+    if (!erros.isEmpty()) {
+        console.log("[LOGIN CONTROLLER] Erros express-validator:", erros.array());
+        return res.render("pages/index", { erros: erros.array() });
+    }
+    // Se autenticado, redireciona
+    if (req.session.autenticado && req.session.autenticado.id) {
+        return res.redirect('/relatorios');
+    } else {
+        // Log para depuração dos erros vindos do middleware
+        console.log("[LOGIN CONTROLLER] Erros middleware:", req.erros);
+        return res.render('pages/index', { erros: req.erros || [] });
+    }
 }
+
+
+
 };
 
 module.exports = usuario_controller;
