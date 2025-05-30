@@ -3,15 +3,14 @@ const usuario = require("./login_model");
 const bcrypt = require("bcryptjs");
 
 verificarUsuAutenticado = (req, res, next) => {
-     if (req.session.autenticado) {
-        var autenticado = req.session.autenticado;
+    // Se o usuário está autenticado, permite acesso
+    if (req.session.autenticado && req.session.autenticado.id) {
+        return next();
     } else {
-        var autenticado = { autenticado: null, id: null };
+        // Se não está autenticado, redireciona para a tela de login
+        return res.redirect('/');
     }
-    req.session.autenticado = autenticado;
-    next();
 }
-
 
 limparSessao = (req, res, next) => {
     req.session.destroy();
@@ -33,8 +32,8 @@ const gravarUsuAutenticado = async (req, res, next) => {
         if (results && results.length === 1) {
             console.log("Senha digitada:", dadosForm.senha);
             console.log("Senha do banco:", results[0].SENHA);
-            // Verifica a senha
-            if (bcrypt.compareSync(dadosForm.senha, results[0].SENHA)) {
+            // Verifica a senha, testa agora 
+            if (await bcrypt.compareSync(dadosForm.senha, results[0].SENHA)) {
                 autenticado = {
                     autenticado: results[0].EMAIL,
                     id: results[0].ID
