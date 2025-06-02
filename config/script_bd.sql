@@ -24,3 +24,9 @@ UPDATE USUARIOS
 SET SENHA = '$2b$10$omMQvSjXp.Jk4suo.KwcruHBwVkDDqdqW89U7wNwUdJoNlpb.GpVy'
 WHERE EMAIL = 'sit.claudia@barueri.sp.gov.br';
 
+
+create table relatorios(
+id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+link varchar(300) NOT NULL,
+data_de_publicacao DATE NOT NULL
+);
