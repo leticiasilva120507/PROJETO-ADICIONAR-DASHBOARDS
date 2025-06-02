@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIT - ADICIONAR RELATÓRIOS</title>
+    <link rel="stylesheet" href="css/adicionar.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+     <% 
+        const amanha = moment().add(1, "day");
+        var btnForm = "OK";
+        var tituloForm = "Adicionar Novo Relatório";
+        var msgErro = {"relatorios":""}
+        var cssErro = {"relatorios":""}
+        let valorCampo = {id_relatorio:"",link:"", data_publicacao:moment(amanha).format( 'YYYY-MM-DD')}
+        let erroValidacao = {link: ""};
+        if(dados && dados!=null){
+            if(dados.id_relatorio  !=""){
+                tituloForm = "Alterar Relatório";
+                btnForm = "Ok";
+            }
+        }
+
+        if(listaErros){
+
+            listaErros.errors.forEach((itemErro)=>{
+                if(itemErro.path == "link"){
+                    msgErro.link = itemErro.msg
+                    cssErro.link = "erroForm"
+                }
+            });
+        }
+    %>
+
+    <main>
+         <h1><%= tituloForm %></h1>
+    <form action="/adicionar" method="post">
+        <input type="hidden" name="id_relatorio" value="<%= valorCampo.id_relatorio %>">
+
+        <label for="link">Link do Relatório</label>
+        <p class="<%=cssErro.relatorios%>"><%= msgErro.relatorios %></p> <!--Mensagem de erro-->
+        <input type="text" name="link" id="link" value="<%= valorCampo.link %>" class="<%= erroValidacao.link %>">
+
+        <label for="data_publicacao">Data de Publicação</label>
+        <input type="date" name="data_publicacao" id="data_publicacao" value="<%= moment(valorCampo.data_publicacao).format('YYYY-MM-DD') %>"><br>
+
+        <input type="submit" value="<%= btnForm %>" class="btnForm">
+    </form>
+    </main>
+    
+</body>
+</html>
