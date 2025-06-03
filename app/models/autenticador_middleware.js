@@ -16,21 +16,22 @@ const usuario = require("./login_model");
 // Importa o bcrypt para comparar senhas criptografadas
 const bcrypt = require("bcryptjs");
 
-// Middleware que protege páginas: só deixa entrar se estiver logado
-verificarUsuAutenticado = (req, res, next) => {
-    if (req.session.autenticado && req.session.autenticado.id) {
-        // Se está logado, pode acessar
+// Middleware responsável por proteger rotas e gerenciar autenticação
+
+// Função para verificar se o usuário está autenticado
+function verificarUsuAutenticado(req, res, next) {
+    if (req.session && req.session.autenticado) {
         return next();
     } else {
-        // Se não está logado, volta para o login
-        return res.redirect('/');
+        res.redirect('/');
     }
 }
 
-// Middleware para logout: limpa a sessão
-limparSessao = (req, res, next) => {
-    req.session.destroy(); // Sai do sistema
-    next();
+// Função para limpar a sessão do usuário
+function limparSessao(req, res, next) {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
 }
 
 // Middleware que faz o login

@@ -16,13 +16,18 @@
         var tituloForm = "Adicionar Novo Relatório";
         var msgErro = {"relatorios":""}
         var cssErro = {"relatorios":""}
-        let valorCampo = {id_relatorio:"",link:"", data_publicacao:moment(amanha).format( 'YYYY-MM-DD')}
+        let valorCampo = {id_relatorio:"",nome_link:"",link:"", data_publicacao:moment(amanha).format( 'YYYY-MM-DD')}
         let erroValidacao = {link: ""};
         if(dados && dados!=null){
             if(dados.id_relatorio  !=""){
                 tituloForm = "Alterar Relatório";
                 btnForm = "Ok";
             }
+            // Preenche os campos com os dados recebidos para edição
+            valorCampo.id_relatorio = dados.id_relatorio || "";
+            valorCampo.nome_link = dados.nome_link || "";
+            valorCampo.link = dados.link || "";
+            valorCampo.data_publicacao = dados.data_publicacao || moment(amanha).format('YYYY-MM-DD');
         }
 
         if(listaErros){
@@ -36,20 +41,40 @@
         }
     %>
 
+    <!--
+    Página: adicionar.ejs
+    - Exibe o formulário para adicionar ou editar um relatório.
+    - Mostra campos para nome, link e data de publicação.
+    - Exibe mensagens de erro de validação.
+    - Usa EJS para preencher valores e mensagens dinamicamente.
+    -->
+
+    <!-- Bloco EJS para preparar variáveis, mensagens e valores dos campos -->
     <main>
-         <h1><%= tituloForm %></h1>
-    <form action="/adicionar" method="post">
-        <input type="hidden" name="id_relatorio" value="<%= valorCampo.id_relatorio %>">
+        <!-- Título do formulário -->
+        <h1><%= tituloForm %></h1>
+        <!-- Formulário de cadastro/edição de relatório -->
+        <form action="/adicionar" method="post">
+            <!-- Campo oculto para id (usado na edição) -->
+            <input type="hidden" name="id_relatorio" value="<%= valorCampo.id_relatorio %>">
 
-        <label for="link">Link do Relatório</label>
-        <p class="<%=cssErro.relatorios%>"><%= msgErro.relatorios %></p> <!--Mensagem de erro-->
-        <input type="text" name="link" id="link" value="<%= valorCampo.link %>" class="<%= erroValidacao.link %>">
+            <!-- Campo nome do relatório -->
+            <label for="nome_link">Nome do Relatório</label>
+            <p class="<%=cssErro.nome_link%>"><%= msgErro.nome_link %></p>
+            <input type="text" name="nome_link" id="nome_link" value="<%= valorCampo.nome_link %>" class="<%= erroValidacao.nome_link %>">
 
-        <label for="data_publicacao">Data de Publicação</label>
-        <input type="date" name="data_publicacao" id="data_publicacao" value="<%= moment(valorCampo.data_publicacao).format('YYYY-MM-DD') %>"><br>
+            <!-- Campo link do relatório -->
+            <label for="link">Link do Relatório</label>
+            <p class="<%=cssErro.link%>"><%= msgErro.link %></p>
+            <input type="text" name="link" id="link" value="<%= valorCampo.link %>" class="<%= erroValidacao.link %>">
 
-        <input type="submit" value="<%= btnForm %>" class="btnForm">
-    </form>
+            <!-- Campo data de publicação -->
+            <label for="data_publicacao">Data de Publicação</label>
+            <input type="date" name="data_publicacao" id="data_publicacao" value="<%= moment(valorCampo.data_publicacao).format('YYYY-MM-DD') %>"><br>
+
+            <!-- Botão de submit -->
+            <input type="submit" value="<%= btnForm %>" class ="btnForm">
+        </form>
     </main>
     
 </body>

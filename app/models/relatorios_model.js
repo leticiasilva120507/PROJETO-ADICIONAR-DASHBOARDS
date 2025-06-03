@@ -1,6 +1,8 @@
+// Model responsável por acessar o banco de dados para relatórios
 var pool = require("../../config/pool_conexoes");
 
 const relatorios_model = {
+    // Busca todos os relatórios
     findAll: async () => {
         try {
             const [linhas] = await pool.query('SELECT * FROM relatorios')
@@ -10,15 +12,17 @@ const relatorios_model = {
         }
     },
 
+    // Busca um relatório pelo id
     findId: async (id) => {
         try {
-            const [linhas,campos] = await pool.query('SELECT * FROM relatorios id = ?',[id] )
+            const [linhas,campos] = await pool.query('SELECT * FROM relatorios WHERE id = ?', [id])
             return linhas;
         } catch (error) {
             return error;
         }
     },
 
+    // Cria um novo relatório
     create: async (dadosForm) => {
         try {
             const [linhas, campos] = await pool.query('INSERT INTO relatorios SET ?', [dadosForm])
@@ -31,6 +35,7 @@ const relatorios_model = {
         }  
     },
 
+    // Atualiza um relatório existente
     update: async (dadosForm, id) => {
         try {
             const [linhas] = await pool.query('UPDATE relatorios SET ? WHERE id = ?', [dadosForm, id])
@@ -40,6 +45,7 @@ const relatorios_model = {
         }  
     },
 
+    // Exclui um relatório pelo id
     delete: async (id) => {
         try {
             const [linhas] = await pool.query('DELETE FROM relatorios WHERE id = ?', [id])
@@ -52,5 +58,5 @@ const relatorios_model = {
   
 };
     
-
+// Exporta o model para ser usado no controller
 module.exports = relatorios_model;

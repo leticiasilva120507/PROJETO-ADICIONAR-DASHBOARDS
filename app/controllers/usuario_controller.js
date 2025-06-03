@@ -17,6 +17,7 @@ const bcrypt = require("bcryptjs"); // Importa o bcrypt para comparar senhas cri
 var salt = bcrypt.genSaltSync(10); // Gera um salt para criptografia (usado em cadastro)
 const {body, validationResult} = require("express-validator"); // Importa funções de validação
 
+// Controller responsável pelo login e autenticação de usuários
 const usuario_controller = {
     // Validação dos campos do formulário de login
        validacaoFormLog: [

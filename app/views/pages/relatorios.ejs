@@ -13,47 +13,22 @@
 <body>
     <link rel="stylesheet" href="css/relatorios.css">
 
+    <!-- Cabeçalho com logo e faixa visual -->
     <header>
         <img src="img/faixa.png" alt="faixa colorida" id="faixa">
         <img src="img/logo-sit.png" alt="logo Barueri" id="logo-sit">
     </header>
 
-
-
+    <!-- Botão para adicionar novo relatório -->
     <button id="botao-add"><a href="/adicionar">+</a></button>
 
-
     <main>
-
-      
-        <!---
-        <section id="relatorios_1">
-            <button class= "botao-dash"><a href="https://fiebedu.sharepoint.com/:x:/s/2025-1_BELVAL_INI3AM/EQOulpY3Vq9Kp27VVhcS5dUBL6cfH45kYJ8cH2lrodzomg?e=kzMJ4I">Relatório Power BI</a></a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            
-        </section>
-
-        <section id="relatorios_2">
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            
-        </section>
-
-        <section id="relatorios_3">
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            <button class= "botao-dash"><a href="">Relatório Power BI</a></button>
-            
-        -->
-
+        <!-- Tabela dinâmica de relatórios -->
         <table>
              <caption>Central de Relatórios</caption>
             <thead>
+                <!-- Títulos das colunas -->
+                <th id="nome">Nome do Relatório</th>
                 <th id="link">Link</th>
                 <th>Data de Publicação</th>
                 <th>Editar</th>
@@ -62,34 +37,37 @@
             <tbody>
                 <% if (link && link.length > 0) { link.forEach(function(relatorio) { %>
                 <tr>
+                    <!-- Nome do relatório -->
+                    <td class="nome">
+                        <%= relatorio.nome_link_relatorio %>
+                    </td>
+                    <!-- Link do relatório -->
                     <td class="link">
                         <a href="<%= relatorio.link_relatorio %>" target="_blank"><%= relatorio.link_relatorio %></a>
                     </td>
+                    <!-- Data de publicação -->
                     <td>
                         <%= moment(relatorio.data_publicacao_relatorio).format('DD/MM/YYYY') %>
                     </td>
+                    <!-- Botão editar -->
                     <td>
                         <button onclick="window.location='/editar?id=<%= relatorio.id %>'" class="edit">
-        <span class="material-symbols-outlined">edit</span>
-    </button>
+                <span class="material-symbols-outlined">edit</span>
+            </button>
                     </td>
+                    <!-- Botão excluir -->
                     <td>
                         <button onclick="window.location='/excluir?id=<%= relatorio.id %>'" class="delete">
-        <span class="material-symbols-outlined">delete</span>
-    </button>
+                <span class="material-symbols-outlined">delete</span>
+            </button>
                     </td>
                 </tr>
                 <% }); } else { %>
-                <tr><td colspan="4" id="sem_relatorios">Nenhum relatório cadastrado.</td></tr>
+                <!-- Linha exibida quando não há relatórios -->
+                <tr><td colspan="5" id="sem_relatorios">Nenhum relatório cadastrado.</td></tr>
                 <% } %>
             </tbody>
         </table>
-     
-   
     </main>
-
-
-    
-    
 </body>
 </html>

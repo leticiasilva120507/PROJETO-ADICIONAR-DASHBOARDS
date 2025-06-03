@@ -7,25 +7,20 @@ Arquivo: login_model.js
 - Exporta o objeto login_model para ser usado em outros arquivos.
 */
 
-/* O pool me dá acesso ao banco de dados e é através do model que 
-modifico o banco de dados sem ter que modificar manualmente no mysql workbench, ou seja, modifico aqui mesmo.*/
-
+// Model responsável por acessar o banco de dados para usuários/login
 const pool = require("../../config/pool_conexoes");
 
-const login_model ={
-    findAll: async() =>{
-        try{
-            const [resultados] = await pool.query(
-                "SELECT ID, EMAIL, SENHA"
-
-            )
-            return resultados;
-        }catch(error){
-            console.log(error);
-            return error;
+const login_model = {
+    // Busca usuário pelo e-mail
+    findByEmail: async (email) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+            return linhas[0];
+        } catch (error) {
+            return null;
         }
     },
-//buscando um usuário pelo e-mail
+    //buscando um usuário pelo e-mail
     findUserEmail: async (camposForm) =>{
         try{
             // Remove espaços do e-mail digitado

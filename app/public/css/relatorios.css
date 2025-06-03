@@ -72,21 +72,13 @@ table th {
 }
 
 #link{
-    width: 60%;
+    width: 50%;
 }
 
 #sem_relatorios{
   text-align: center;
 }
 
-.play_circle {
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 2rem;
-  background-color: #ffc107;
-}
 
 .edit {
   border: none;
@@ -95,14 +87,6 @@ table th {
   height: 40px;
   font-size: 2rem;
   background-color: #11a6cb;
-}
-.done_outline {
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 2rem;
-  background-color: #28a745;
 }
 
 .delete {
@@ -113,10 +97,12 @@ table th {
   font-size: 2rem;
   background-color: #dc3545;
 }
-
-.stop_circle,
-.pending {
-  border: none;
+.edit:hover,
+.delete:hover {
+  cursor: pointer;
+  background-color: #097995;
+  color: white;
+  transition: 0.3s;
 }
 
 label {
