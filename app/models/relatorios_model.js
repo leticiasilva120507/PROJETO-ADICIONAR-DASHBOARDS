@@ -22,6 +22,19 @@ const relatorios_model = {
         }
     },
 
+    // Busca uma página de relatórios para paginação
+    findPage: async (pagina, total) => {
+        try {
+            // Garante que o offset nunca seja negativo
+            const offset = Math.max(0, (pagina - 1) * total);
+            // Busca os relatórios da página desejada
+            const [linhas] = await pool.query('SELECT * FROM relatorios LIMIT ?, ?', [offset, total]);
+            return linhas;
+        } catch (error) {
+            return error;
+        }  
+    },
+
     // Cria um novo relatório
     create: async (dadosForm) => {
         try {
@@ -55,7 +68,15 @@ const relatorios_model = {
         }  
     },
 
-  
+    // Retorna o total de registros da tabela relatorios (para paginação)
+    totalReg: async () => {
+        try {
+            const [linhas] = await pool.query('SELECT COUNT(*) as total FROM relatorios');
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
 };
     
 // Exporta o model para ser usado no controller

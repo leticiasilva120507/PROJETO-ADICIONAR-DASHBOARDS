@@ -12,8 +12,9 @@ router.get('/', function(req, res){
     res.render('pages/index', {erros: []});
 });
 
-// Rota protegida: lista de relatórios
-router.get('/relatorios', verificarUsuAutenticado, relatorios_controller.listarRelatorios);
+// Rota protegida: lista de relatórios (com paginação)
+router.get('/relatorios', verificarUsuAutenticado, relatorios_controller.listarRelatoriosPaginados);
+
 
 // Rota de login (POST)
 router.post("/index", usuario_controller.validacaoFormLog,
