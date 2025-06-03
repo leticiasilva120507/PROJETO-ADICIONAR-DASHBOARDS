@@ -29,18 +29,18 @@ const relatorios_controller = {
    listarRelatoriosPaginados: async (req, res) => {
     res.locals.moment = moment;
     try {
-        let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
-        let results = null
-        let regPagina = 5
-        let inicio = parseInt(pagina - 1) * regPagina
+        // Garante que a página seja um número inteiro e >= 1
+        let pagina = parseInt(req.query.pagina) || 1;
+        if (pagina < 1) pagina = 1;
+        let regPagina = 5;
+        let inicio = (pagina - 1) * regPagina;
         let totReg = await relatorios_model.totalReg();
         let totPaginas = Math.ceil(totReg[0].total / regPagina);
-        results = await relatorios_model.findPage(inicio, regPagina);
-        console.log('Resultados retornados do banco:', results); // debug
+        let results = await relatorios_model.findPage(pagina, regPagina);
         let paginador = totReg[0].total <= regPagina 
             ? null 
             : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
-            res.render("pages/relatorios", { link: results, paginador: paginador });
+        res.render("pages/relatorios", { link: results, paginador: paginador });
     } catch (e) {
         console.log(e); // exibir os erros no console do vs code
         res.json({ erro: "Falha ao acessar dados" });
