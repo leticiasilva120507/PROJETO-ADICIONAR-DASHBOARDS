@@ -31,3 +31,5 @@ CREATE TABLE relatorios(
   link_relatorio VARCHAR(300) NOT NULL,
   data_publicacao_relatorio DATE NOT NULL
 );
+
+ SELECT * FROM LOGIN.relatorios limit 0, 5;

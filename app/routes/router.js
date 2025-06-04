@@ -34,7 +34,7 @@ router.get("/excluir", function (req, res) {
 });
 
 // Rota para exibir formulário de adicionar relatório
-router.get("/adicionar", function (req, res) {
+router.get("/adicionar", verificarUsuAutenticado, function (req, res) {
   res.locals.moment = moment;
   res.render("pages/adicionar", { dados: null, listaErros: null });
 });
