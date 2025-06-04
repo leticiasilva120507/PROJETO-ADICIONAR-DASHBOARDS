@@ -25,18 +25,9 @@ SET SENHA = '$2b$10$omMQvSjXp.Jk4suo.KwcruHBwVkDDqdqW89U7wNwUdJoNlpb.GpVy'
 WHERE EMAIL = 'sit.claudia@barueri.sp.gov.br';
 
 
-create table relatorios(
-id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-link varchar(300) NOT NULL,
-data_de_publicacao DATE NOT NULL
+CREATE TABLE relatorios(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nome_link_relatorio VARCHAR(200) NOT NULL,
+  link_relatorio VARCHAR(300) NOT NULL,
+  data_publicacao_relatorio DATE NOT NULL
 );
-
-ALTER TABLE relatorios
-  CHANGE link link_relatorio VARCHAR(300) NOT NULL,
-  CHANGE data_de_publicacao data_publicacao_relatorio DATE NOT NULL;
-
-  ALTER TABLE relatorios
-  ADD COLUMN nome_relatorio VARCHAR(200) NOT NULL AFTER id;
-
-  ALTER TABLE relatorios
-  CHANGE nome_relatorio nome_link_relatorio VARCHAR(200) NOT NULL;
