@@ -33,14 +33,14 @@ router.get("/excluir", function (req, res) {
   relatorios_controller.excluirRelatorio(req, res);
 });
 
-// Rota para exibir formulário de adicionar relatório
-router.get("/adicionar", function (req, res) {
+// Rota para exibir formulário de adicionar relatório (agora protegida)
+router.get("/adicionar", verificarUsuAutenticado, function (req, res) {
   res.locals.moment = moment;
   res.render("pages/adicionar", { dados: null, listaErros: null });
 });
 
 // Rota para adicionar relatório (POST)
-router.post("/adicionar", relatorios_controller.regrasValidacao, function (req, res) {
+router.post("/adicionar", verificarUsuAutenticado, relatorios_controller.regrasValidacao, function (req, res) {
      relatorios_controller.adicionarRelatorios(req, res);
   }
 );
